@@ -28,7 +28,9 @@ class parser_manager:
             # for player in current_result.players:
                 
             # total_result.update(current_result);
-        total_result.collision()
+        return total_result
+        # total_result.players = sorted(total_result.players, key=lambda player: player.avg)
+        # total_result.collision()
 
 
     # extracts all the replay data from the file

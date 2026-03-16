@@ -19,6 +19,11 @@ class player:
         self.dmg_enemies     = 0
         self.dmg_destroyed   = 0
 
+        
+        self.kapas_cv_score = 0
+        self.accuracy_score = 0
+        self.eff_accuracy_score = 0
+
     def update(self, avg, xp, 
                shots, hits, pens, assist, 
                hits_recv, pens_recv, nonpens_recv,
@@ -38,6 +43,11 @@ class player:
         self.nonpens_recv += nonpens_recv
         self.dmg_enemies += dmg_enemies
         self.dmg_destroyed += dmg_destroyed
+
+    def refresh(self):
+        self.kapas_cv_score = self.kapas_cv_number()
+        self.accuracy_score = self.accuracy()
+        self.eff_accuracy_score = self.eff_accuracy()
 
     def accuracy(self):
         if self.shots == 0: 
@@ -80,11 +90,15 @@ class player_list:
     
     def is_in(self, name):
         return (name in self.names)
+
+    def refresh_players(self):
+        for player in self.players:
+            player.refresh()
     
     def collision(self):
         with open("players.txt", "w") as fp:    
             for player in self.players:
-                fp.write(f"{player.name: <25} {math.trunc(player.avg): <25}"
+                fp.write(f"{player.name: <25}{player.battles: <25}{math.trunc(player.avg): <25}"
                          f"{math.trunc(player.position_eff()): <25}{math.trunc(player.blocking_ratio()): <25}"
                          f"{player.shots: <25}{player.hits: <25}{player.pens: <25}"
                          f"{math.trunc(player.accuracy()): <25}{math.trunc(player.eff_accuracy()): <25}{math.trunc(player.kapas_cv_number()): <25}\n") 
