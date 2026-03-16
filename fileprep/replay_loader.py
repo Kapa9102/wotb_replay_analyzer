@@ -3,14 +3,11 @@ import os, os.path
 import shutil
 import pickle
 import zipfile
-
+# import defs.py
 DEF_DIR_NAME = "replays_loaded"
-PREFIX_DEBUG = "filprep/replay_loader: "
 DEFAULT_UNZIP_NAME = "battle_results.dat"
-
+PREFIX_DEBUG = "filprep/replay_loader: "
 class replay_loader:
-
-
     def __init__(self, dirname):
         self.dirname = dirname
         self.replays = [name for name in os.listdir(dirname) if 
